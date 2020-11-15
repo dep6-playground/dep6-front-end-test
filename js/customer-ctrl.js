@@ -28,12 +28,13 @@ var customerIdElement = document.querySelector('#txt-id');
 var customerNameElement = document.querySelector('#txt-name');
 var customerAddressElement = document.querySelector('#txt-address');
 var btnSaveElement = document.querySelector('#btn-save');
+var btnClearElement = document.querySelector('#btn-clear');
 var helperTextIdElement = document.querySelector('#helper-text-id');
 var helperTextNameElement = document.createElement('small');
 var helperTextAddressElement = document.createElement('small');
 var tableElement = document.querySelector('#tbl-customers');
-var trashIconElements = document.querySelector('.fas');
 var tableData = [];
+
 
 
 /*===============================================================================
@@ -66,6 +67,9 @@ customerAddressElement.addEventListener('input',function (){
     helperTextAddressElement.remove();
     customerAddressElement.className = 'form-control';
 });
+btnClearElement.addEventListener('click',function (){
+    customerIdElement.readOnly = false;
+})
 
 
 
@@ -143,10 +147,18 @@ function validate(){
         });
         cellTrashIconElement.addEventListener('mouseover',function (){
             trashIconElement.className = 'fas fa-trash-alt';
-        })
+        });
         cellTrashIconElement.addEventListener('mouseout',function (){
             trashIconElement.className = 'fas fa-trash';
-        })
+        });
+
+        tableRowElement.addEventListener('click',function (){
+            customerIdElement.value = tableRowElement.children[0].innerText;
+            customerIdElement.readOnly = true;
+            customerNameElement.value = tableRowElement.children[1].innerText;
+            customerAddressElement.value = tableRowElement.children[2].innerText;
+        });
+
 
         tableData.push(tableRowElement);
         tableElement.appendChild(tableRowElement);
