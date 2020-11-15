@@ -115,12 +115,20 @@ function validate(){
         cellAddressElement.innerText = customerAddressElement.value;
         tableRowElement.appendChild(cellAddressElement);
 
+        var cellTrashIconElement = document.createElement('td');
         var trashIconElement = document.createElement('i');
         trashIconElement.className = 'fas fa-trash';
-        tableRowElement.appendChild(trashIconElement);
-        trashIconElement.addEventListener('click',function (){
+        cellTrashIconElement.appendChild(trashIconElement);
+        tableRowElement.appendChild(cellTrashIconElement);
+        cellTrashIconElement.addEventListener('click',function (){
             tableRowElement.remove();
         });
+        cellTrashIconElement.addEventListener('mouseover',function (){
+            trashIconElement.className = 'fas fa-trash-alt';
+        })
+        cellTrashIconElement.addEventListener('mouseout',function (){
+            trashIconElement.className = 'fas fa-trash';
+        })
 
         tableElement.appendChild(tableRowElement);
 
