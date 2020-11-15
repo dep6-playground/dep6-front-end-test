@@ -33,7 +33,9 @@ var helperTextIdElement = document.querySelector('#helper-text-id');
 var helperTextNameElement = document.createElement('small');
 var helperTextAddressElement = document.createElement('small');
 var tableElement = document.querySelector('#tbl-customers');
+var footerElement = document.querySelector('#table-footer');
 var tableData = [];
+
 
 
 
@@ -105,7 +107,7 @@ function validate(){
         helperTextAddressElement.className = 'form-text text-danger';
         customerAddressElement.parentElement.appendChild(helperTextAddressElement);
     }
-    else if(isPrerent()){
+    else if(isPresent()){
         for(var i=0; tableData.length;i++){
             if(tableData[i].children[0].innerText === customerIdElement.value){
                 tableData[i].children[1].innerText = customerNameElement.value;
@@ -140,6 +142,9 @@ function validate(){
                 for(var i=0; i<tableData.length;i++){
                     if(tableData[i] === tableRowElement){
                         tableData.splice(i,1);
+                        if(tableData.length===0){
+                            footerElement.style.visibility='visible';
+                        }
                     }
                 }
                 tableRowElement.remove();
@@ -159,16 +164,14 @@ function validate(){
             customerAddressElement.value = tableRowElement.children[2].innerText;
         });
 
-
         tableData.push(tableRowElement);
+        footerElement.style.visibility='hidden';
         tableElement.appendChild(tableRowElement);
 
-
     }
-
 }
 
-function isPrerent(){
+function isPresent(){
     for(var i=0; i < tableData.length; i++){
         if(tableData[i].children[0].innerText === customerIdElement.value){
             return true;
@@ -176,3 +179,5 @@ function isPrerent(){
     }
     return false;
 }
+
+

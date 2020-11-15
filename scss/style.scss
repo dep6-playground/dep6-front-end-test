@@ -97,6 +97,10 @@ main {
       cursor: pointer;
       background-color: darkgrey;
     }
+
+    /*#table-footer{
+      visibility: hidden;
+    }*/
   }
 }
 
@@ -112,5 +116,6 @@ footer {
   right: 0;
   padding: 10px;
   border-top: 1px solid lightgrey;
+
 }
 
