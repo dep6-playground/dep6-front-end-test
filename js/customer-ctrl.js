@@ -31,6 +31,8 @@ var btnSaveElement = document.querySelector('#btn-save');
 var helperTextIdElement = document.querySelector('#helper-text-id');
 var helperTextNameElement = document.createElement('small');
 var helperTextAddressElement = document.createElement('small');
+var tableElement = document.querySelector('#tbl-customers');
+var trashIconElements = document.querySelector('.fas');
 
 
 /*===============================================================================
@@ -67,6 +69,7 @@ customerAddressElement.addEventListener('input',function (){
 
 
 
+
 /*===============================================================================
  * Functions
  *===============================================================================*/
@@ -96,6 +99,33 @@ function validate(){
         helperTextAddressElement.innerText = 'Address can’t be empty and at least should have three letters';
         helperTextAddressElement.className = 'form-text text-danger';
         customerAddressElement.parentElement.appendChild(helperTextAddressElement);
+    }
+    else{
+        var tableRowElement = document.createElement('tr');
+
+        var cellIdElement = document.createElement('td');
+        cellIdElement.innerText = customerIdElement.value;
+        tableRowElement.appendChild(cellIdElement);
+
+        var cellNameElement = document.createElement('td');
+        cellNameElement.innerText = customerNameElement.value;
+        tableRowElement.appendChild(cellNameElement);
+
+        var cellAddressElement = document.createElement('td');
+        cellAddressElement.innerText = customerAddressElement.value;
+        tableRowElement.appendChild(cellAddressElement);
+
+        var trashIconElement = document.createElement('i');
+        trashIconElement.className = 'fas fa-trash';
+        tableRowElement.appendChild(trashIconElement);
+        trashIconElement.addEventListener('click',function (){
+            tableRowElement.remove();
+        });
+
+        tableElement.appendChild(tableRowElement);
+
+
+
     }
 
 
