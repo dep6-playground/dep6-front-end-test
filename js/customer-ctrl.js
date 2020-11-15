@@ -32,6 +32,8 @@
 init();
 
 function init(){
+    document.querySelector('#txt-id').focus();
+
     // Todo: add the initialization code if any
 }
 
