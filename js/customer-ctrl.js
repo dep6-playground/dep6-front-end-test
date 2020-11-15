@@ -33,6 +33,7 @@ var helperTextNameElement = document.createElement('small');
 var helperTextAddressElement = document.createElement('small');
 var tableElement = document.querySelector('#tbl-customers');
 var trashIconElements = document.querySelector('.fas');
+var tableData = [];
 
 
 /*===============================================================================
@@ -100,6 +101,14 @@ function validate(){
         helperTextAddressElement.className = 'form-text text-danger';
         customerAddressElement.parentElement.appendChild(helperTextAddressElement);
     }
+    else if(isPrerent()){
+        for(var i=0; tableData.length;i++){
+            if(tableData[i].children[0].innerText === customerIdElement.value){
+                tableData[i].children[1].innerText = customerNameElement.value;
+                tableData[i].children[2].innerText = customerAddressElement.value;
+            }
+        }
+    }
     else{
         var tableRowElement = document.createElement('tr');
 
@@ -130,12 +139,19 @@ function validate(){
             trashIconElement.className = 'fas fa-trash';
         })
 
+        tableData.push(tableRowElement);
         tableElement.appendChild(tableRowElement);
-
 
 
     }
 
+}
 
-
+function isPrerent(){
+    for(var i=0; i < tableData.length; i++){
+        if(tableData[i].children[0].innerText === customerIdElement.value){
+            return true;
+        }
+    }
+    return false;
 }
