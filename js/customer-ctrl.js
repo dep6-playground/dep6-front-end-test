@@ -114,6 +114,7 @@ function validate(){
 
         var cellIdElement = document.createElement('td');
         cellIdElement.innerText = customerIdElement.value;
+        cellIdElement.className = 'text-center';
         tableRowElement.appendChild(cellIdElement);
 
         var cellNameElement = document.createElement('td');
@@ -128,9 +129,17 @@ function validate(){
         var trashIconElement = document.createElement('i');
         trashIconElement.className = 'fas fa-trash';
         cellTrashIconElement.appendChild(trashIconElement);
+        cellTrashIconElement.className='text-center';
         tableRowElement.appendChild(cellTrashIconElement);
         cellTrashIconElement.addEventListener('click',function (){
-            tableRowElement.remove();
+            if (confirm('Are you sure you want to delete the selected record?')){
+                for(var i=0; i<tableData.length;i++){
+                    if(tableData[i] === tableRowElement){
+                        tableData.splice(i,1);
+                    }
+                }
+                tableRowElement.remove();
+            }
         });
         cellTrashIconElement.addEventListener('mouseover',function (){
             trashIconElement.className = 'fas fa-trash-alt';
