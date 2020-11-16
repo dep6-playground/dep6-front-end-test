@@ -56,7 +56,7 @@ function init(){
  *===============================================================================*/
 
 // Todo: add all event listeners and handlers here
-btnSaveElement.addEventListener('click',validate);
+btnSaveElement.addEventListener('click',validateAndAdd);
 customerIdElement.addEventListener('input',function (){
     helperTextIdElement.className = 'form-text text-muted';
     customerIdElement.className = 'form-control';
@@ -82,32 +82,32 @@ btnClearElement.addEventListener('click',function (){
  *===============================================================================*/
 
 // Todo: add all functions
-function validate(){
+function validateAndAdd(){
     var customerId = document.querySelector('#txt-id').value;
     var customerName = document.querySelector('#txt-name').value;
     var customerAddress = document.querySelector('#txt-address').value;
 
-    if(!customerId.match('C[0-9]{2}[1-9]')){
+    if(!customerId.match('C[0-9]{3}')){
         helperTextIdElement.className = 'form-text text-danger';
-        customerIdElement.className += 'border border-danger';
+        customerIdElement.className = 'form-control border border-danger';
         customerIdElement.focus();
     }
     else if(!customerName.match('[a-zA-Z.]{3,}[a-zA-Z. ]*')){
-        customerNameElement.className += 'border border-danger';
+        customerNameElement.className = 'form-control border border-danger';
         customerNameElement.focus();
-        helperTextNameElement.innerText = 'Name can only contain capital or simple alphabetical letters, spaces and periods';
+        helperTextNameElement.innerText = 'Name cannot be empty and can only contain capital or simple alphabetical letters, spaces and periods';
         helperTextNameElement.className = 'form-text text-danger';
         customerNameElement.parentElement.appendChild(helperTextNameElement);
 
     }
     else if(!customerAddress.match('[^ ]{3,}')){
-        customerAddressElement.className += 'border border-danger';
+        customerAddressElement.className = 'form-control border border-danger';
         customerAddressElement.focus();
         helperTextAddressElement.innerText = 'Address can’t be empty and at least should have three letters';
         helperTextAddressElement.className = 'form-text text-danger';
         customerAddressElement.parentElement.appendChild(helperTextAddressElement);
     }
-    else if(isPresent()){
+    else if(exists()){
         for(var i=0; tableData.length;i++){
             if(tableData[i].children[0].innerText === customerIdElement.value){
                 tableData[i].children[1].innerText = customerNameElement.value;
@@ -171,7 +171,7 @@ function validate(){
     }
 }
 
-function isPresent(){
+function exists(){
     for(var i=0; i < tableData.length; i++){
         if(tableData[i].children[0].innerText === customerIdElement.value){
             return true;
